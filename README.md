@@ -1,6 +1,6 @@
 # SpeedifyCSS
 
-![SpeedifyCSS](assets/logo.svg){: width="200"}
+<img src="assets/logo.svg" alt="SpeedifyCSS" width="200">
 
 ## Getting Started
 
