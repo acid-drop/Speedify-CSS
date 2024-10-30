@@ -67,6 +67,9 @@ class CSS {
         //Get cache directory for the URL
         $cache_dir =  self::get_cache_path_from_url($source_url);
 
+        //Set lookup file
+        $lookup_file = $cache_dir . "lookup.json";
+
         // Create the cache directory if it does not exist
         !is_dir($cache_dir) && mkdir($cache_dir, 0755, true);        
 
@@ -100,24 +103,38 @@ class CSS {
             
 
         }
+        
+        //Get current lookup
+        $current_lookup = json_decode((string)file_get_contents($lookup_file));
+        $current_lookup = (array) $current_lookup->lookup;      
+        
+        //Merge
+        $merged_lookup = array_merge($current_lookup,$lookup);
 
         //Create the data array to save
         $data = array(
-            'lookup' => $lookup,
+            'lookup' => $merged_lookup,
             'source_url' => $source_url,
             'post_id' => $post_id,
             'post_types' => $post_types
         );
 
         //Save the lookup
-        file_put_contents($cache_dir . "lookup.json", (string)json_encode($data));  
+        file_put_contents($lookup_file, (string)json_encode($data));  
 
         //Refresh cache
         if($post_id) {
             $post_object = get_post( $post_id );
 
             self::remove_non_cache_purge_clean_hooks_from_post_updated();
+
+            //Works fine with most caching plugins
             do_action( 'post_updated', (int) $post_id, $post_object, $post_object );
+
+            if(class_exists('Nginx_Helper')) {
+                do_action( 'transition_post_status', 'publish', 'publish', $post_object );
+            }
+
         }
 
     }    

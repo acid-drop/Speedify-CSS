@@ -95,16 +95,16 @@ class Menu {
         // Enqueue the admin page JavaScript file.
         wp_enqueue_script(
             'speedify_ucss_admin',                      // Handle for the script
-            UCSS_PLUGIN_URL . 'assets/index.js', // URL to the script
+            UCSS_PLUGIN_URL . 'assets/admin/admin.min.js', // URL to the script
             array(),                                   // Dependencies (none)
-            filemtime( UCSS_PLUGIN_DIR . 'assets/index.js' ), // Version based on file modification time
+            filemtime( UCSS_PLUGIN_DIR . 'assets/admin/admin.min.js' ), // Version based on file modification time
             true                                       // Load in the footer
         );
 
         // Enqueue the admin page CSS file.
         wp_enqueue_style(
             'speedify_ucss_admin_style',                // Handle for the style
-            UCSS_PLUGIN_URL . 'assets/index.css' // URL to the stylesheet
+            UCSS_PLUGIN_URL . 'assets/admin/admin.min.css' // URL to the stylesheet
         );
     }
 
