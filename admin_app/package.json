@@ -1,0 +1,34 @@
+{
+  "name": "admin-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "docs": "../vendor/apigen/apigen/bin/apigen ../src --output ../docs",
+    "package": "cd ../ && zip -qr speedify_css.zip . -x '*node_modules*' '*admin_app/*' '*.config.js' '*.env' '*composer.*' '*.git*' '*.zip*' && cd ../ && mkdir -p speedify_css_plugin && cd speedify_css_plugin && find . -mindepth 1 -not -name '.git' -not -path './.git/*' -exec rm -rf {} + && mv ../speedify_css/speedify_css.zip . && unzip speedify_css.zip && rm speedify_css.zip",
+    "package_dev": "cd ../ && zip -qr speedify_css.zip . -x '*node_modules*' '*.env' '*.git*' '*.zip*' && cd ../ && mkdir -p speedify_css_plugin && cd speedify_css_plugin && find . -mindepth 1 -not -name '.git' -not -path './.git/*' -exec rm -rf {} + && mv ../speedify_css/speedify_css.zip . && unzip speedify_css.zip && rm speedify_css.zip",
+    "beautify": "node node_modules/js-beautify/js/bin/js-beautify.js ../assets/admin/admin.min.js -o ../assets/admin/admin.js",
+    "minify_php": "npx @cedx/php-minifier ../src ../../speedify_css_plugin/src",
+    "watch": "vite build --watch",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@cedx/php-minifier": "^4.0.1",
+    "axios": "^1.7.2",
+    "flowbite": "^2.4.1",
+    "vue": "^3.4.29"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
+    "autoprefixer": "^10.4.19",
+    "fast-glob": "^3.3.2",
+    "fs-extra": "^11.2.0",
+    "postcss": "^8.4.39",
+    "postcss-nested": "^6.0.1",
+    "tailwindcss": "^3.4.4",
+    "terser": "^5.31.3",
+    "vite": "^5.3.1"
+  }
+}
