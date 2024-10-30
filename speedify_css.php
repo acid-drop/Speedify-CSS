@@ -3,7 +3,7 @@
 Plugin Name: Speedify CSS
 Description: Removes unused CSS from WordPress sites
 Author: Leon Chevalier
-Version: 0.03.0
+Version: 0.04.0
 Text Domain: speedify-css
 Author URI: https://github.com/acid-drop
 */
